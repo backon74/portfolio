@@ -1,0 +1,29 @@
+{
+  "resultCount": 3,
+  "results": [
+    {
+      "trackName": "Workin' Day and Night",
+      "artistName": "Michael Jackson",
+      "collectionName": "Off the Wall",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/.../preview.m4a",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music/.../100x100bb.jpg",
+      "trackViewUrl": "https://music.apple.com/us/album/workin-day-and-night/123?i=456"
+    },
+    {
+      "trackName": "Workin' Day and Night (Live)",
+      "artistName": "Michael Jackson",
+      "collectionName": "HIStory: Past, Present and Future, Book I",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/.../preview2.m4a",
+      "artworkUrl100": "https://is2-ssl.mzstatic.com/image/thumb/Music/.../100x100bb.jpg",
+      "trackViewUrl": "https://music.apple.com/us/album/workin-live/999?i=111"
+    },
+    {
+      "trackName": "Workin' Day and Night (Cover)",
+      "artistName": "Some Tribute Band",
+      "collectionName": "Tribute Album",
+      "previewUrl": "https://audio-ssl.itunes.apple.com/.../preview3.m4a",
+      "artworkUrl100": "https://is3-ssl.mzstatic.com/image/thumb/Music/.../100x100bb.jpg",
+      "trackViewUrl": "https://music.apple.com/us/album/tribute/222"
+    }
+  ]
+}

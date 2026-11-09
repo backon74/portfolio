@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm i *)",
+      "Bash(npm run *)",
+      "Bash(npm test)",
+      "Bash(npm ls *)",
+      "Bash(npx create-next-app@latest *)",
+      "Bash(npx playwright *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vitest *)",
+      "Bash(npx lighthouse *)",
+      "Bash(npx prettier *)",
+      "Bash(npx eslint *)",
+      "Bash(node *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Bash(find *)"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git push)",
+      "Bash(git reset --hard *)",
+      "Bash(vercel *)",
+      "Read(./.env.local)",
+      "Read(./.env)"
+    ]
+  }
+}

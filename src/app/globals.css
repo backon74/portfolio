@@ -1,0 +1,457 @@
+@import "tailwindcss";
+
+@theme {
+  /* HamzaOS v2 — blue cyberpunk tokens */
+  --color-bg: #e7eef7;
+  --color-sky-1: #dce9ff;
+  --color-sky-2: #b9cff0;
+  --color-surface: rgba(255, 255, 255, 0.72);
+  --color-surface-2: rgba(240, 245, 253, 0.72);
+  --color-surface-3: rgba(220, 230, 246, 0.65);
+  --color-surface-solid: #ffffff;
+  --color-surface-solid-2: #f0f5fd;
+  --color-chrome-1: #f5f8fd;
+  --color-chrome-2: #c7d4ea;
+  --color-chrome-3: #7d93b8;
+  --color-hairline: rgba(10, 30, 60, 0.1);
+  --color-hairline-strong: rgba(10, 30, 60, 0.18);
+  --color-ink: #0b1a33;
+  --color-ink-2: #334867;
+  --color-ink-3: #6b7e9c;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4fd3;
+  --color-accent-hot: #22d3ff;
+  --color-accent-soft: #dce8ff;
+  --color-success: #0ea5a5;
+  --color-warning: #c98a12;
+  --color-danger: #e24d55;
+  --color-tl-close: #ff5f57;
+  --color-tl-min: #ffbd2e;
+  --color-tl-max: #28c940;
+  --color-gh-0: #dde6f3;
+  --color-gh-1: #a6c8f0;
+  --color-gh-2: #66a4e8;
+  --color-gh-3: #2b7adf;
+  --color-gh-4: #0b4bb0;
+  --color-glass: rgba(255, 255, 255, 0.55);
+  --color-glass-border: rgba(255, 255, 255, 0.75);
+  --color-glass-cyan: rgba(34, 211, 255, 0.12);
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Shadows w/ cyan rim glow */
+  --shadow-window:
+    0 0 0 0.5px rgba(10, 30, 60, 0.14),
+    0 2px 6px rgba(10, 30, 60, 0.08),
+    0 24px 60px -16px rgba(10, 30, 60, 0.3),
+    0 0 0 1px rgba(34, 211, 255, 0.08),
+    0 0 36px -8px rgba(34, 211, 255, 0.22);
+  --shadow-window-inactive:
+    0 0 0 0.5px rgba(10, 30, 60, 0.1), 0 8px 24px -8px rgba(10, 30, 60, 0.14);
+  --shadow-glass:
+    0 0 0 0.5px rgba(10, 30, 60, 0.08),
+    0 8px 30px -6px rgba(10, 30, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 0 20px -6px rgba(34, 211, 255, 0.18);
+  --shadow-card:
+    0 0 0 1px rgba(10, 30, 60, 0.08), 0 1px 2px rgba(10, 30, 60, 0.04);
+  --shadow-pop: 0 10px 30px -10px rgba(10, 30, 60, 0.3);
+  --shadow-chrome:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(10, 30, 60, 0.18),
+    0 1px 2px rgba(10, 30, 60, 0.08),
+    0 0 14px -4px rgba(34, 211, 255, 0.4);
+  --shadow-neon: 0 0 24px rgba(34, 211, 255, 0.45);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-feature-settings:
+    "cv11",
+    "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+[data-shell="desktop"] {
+  cursor: default;
+}
+
+/* Wallpaper fallback — halftone cloud sky approximation */
+.hamzaos-wallpaper {
+  background:
+    radial-gradient(
+      1400px 900px at 50% 10%,
+      rgba(255, 255, 255, 0.55) 0%,
+      transparent 55%
+    ),
+    radial-gradient(1000px 700px at 18% 85%, #ffffff55 0%, transparent 50%),
+    radial-gradient(900px 600px at 82% 78%, #ffffff40 0%, transparent 55%),
+    linear-gradient(180deg, var(--color-sky-1) 0%, var(--color-sky-2) 100%);
+  background-size: cover;
+}
+
+/* Subtle grain */
+.hamzaos-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Scanline overlay — can be toggled onto any layer */
+.hamzaos-scanlines {
+  position: relative;
+}
+.hamzaos-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(10, 30, 60, 0.06) 0px,
+    rgba(10, 30, 60, 0.06) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+@keyframes scanline-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+
+@keyframes rgb-split {
+  0% {
+    filter: none;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    filter: drop-shadow(1px 0 0 rgba(255, 50, 80, 0.6))
+      drop-shadow(-1px 0 0 rgba(34, 211, 255, 0.6));
+    transform: translate3d(0.5px, 0, 0);
+  }
+  60% {
+    filter: drop-shadow(-1px 0 0 rgba(255, 50, 80, 0.5))
+      drop-shadow(1px 0 0 rgba(34, 211, 255, 0.5));
+    transform: translate3d(-0.5px, 0, 0);
+  }
+  100% {
+    filter: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spectrum-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes cyan-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-breathe {
+  0%,
+  100% {
+    opacity: 0.85;
+    letter-spacing: -0.04em;
+  }
+  50% {
+    opacity: 1;
+    letter-spacing: -0.035em;
+  }
+}
+
+/* Glass fallback */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hamzaos-glass {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+.hamzaos-glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+}
+
+/* Liquid Glass — Apple iOS 26 inspired subtle variant.
+   Wrapped in @layer components so Tailwind utilities (fixed/absolute/etc) win. */
+@layer components {
+  .liquid-glass {
+    position: relative;
+    isolation: isolate;
+    background: rgba(236, 244, 255, 0.42);
+    backdrop-filter: blur(32px) saturate(185%);
+    -webkit-backdrop-filter: blur(32px) saturate(185%);
+    box-shadow:
+      0 0 0 0.5px rgba(255, 90, 120, 0.25),
+      0 0 0 1px rgba(34, 211, 255, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 0 rgba(10, 20, 40, 0.22),
+      inset 1px 0 0 rgba(255, 255, 255, 0.18),
+      inset -1px 0 0 rgba(34, 211, 255, 0.08),
+      0 20px 50px -16px rgba(10, 30, 60, 0.28),
+      0 0 40px -8px rgba(34, 211, 255, 0.22);
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    z-index: -1;
+  }
+  .liquid-glass::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: radial-gradient(
+      60% 100% at 50% 100%,
+      rgba(34, 211, 255, 0.14) 0%,
+      rgba(34, 211, 255, 0) 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@keyframes wallpaper-breathe {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    transform: scale(1.015) translate3d(0, -4px, 0);
+    filter: brightness(1.05) saturate(1.08);
+  }
+}
+
+@keyframes rim-pulse {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes aurora-drift {
+  0% {
+    background-position: 0% 50%, 100% 50%, 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%, 50% 100%;
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%, 50% 0%;
+  }
+}
+
+.recruiter-aurora {
+  background:
+    radial-gradient(1200px 800px at 15% 20%, rgba(34, 211, 255, 0.32), transparent 55%),
+    radial-gradient(1000px 700px at 85% 35%, rgba(138, 92, 240, 0.28), transparent 55%),
+    radial-gradient(1200px 900px at 50% 95%, rgba(37, 99, 235, 0.3), transparent 55%);
+  background-size: 200% 200%, 200% 200%, 200% 200%;
+  animation: aurora-drift 22s ease-in-out infinite;
+  filter: blur(2px) saturate(130%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recruiter-aurora {
+    animation: none;
+  }
+}
+
+@keyframes data-stream {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 120px 0;
+  }
+}
+
+/* Chrome tile recipe — reused for every app icon */
+.chrome-tile {
+  background: linear-gradient(
+    180deg,
+    var(--color-chrome-1) 0%,
+    var(--color-chrome-2) 100%
+  );
+  box-shadow: var(--shadow-chrome);
+  position: relative;
+  overflow: hidden;
+}
+.chrome-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    rgba(255, 255, 255, 0.55) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.chrome-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    80% 60% at 50% 100%,
+    rgba(34, 211, 255, 0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Barcode strip */
+.barcode {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-ink) 0 1px,
+    transparent 1px 3px,
+    var(--color-ink) 3px 4px,
+    transparent 4px 7px,
+    var(--color-ink) 7px 9px,
+    transparent 9px 11px
+  );
+}
+
+/* Hero display type — outline + grain */
+.hero-type {
+  font-family: var(--font-display), var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-ink);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .04  0 0 0 0 .1  0 0 0 0 .2  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  -webkit-background-clip: text;
+  background-clip: text;
+  mix-blend-mode: multiply;
+}
+
+/* Cyan-stroke micro text */
+.mono-stroke {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  -webkit-text-stroke: 0.3px currentColor;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.08s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.08s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Recruiter print */
+@media print {
+  [data-recruiter-bar],
+  [data-print-hide] {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  [data-recruiter-paper] {
+    box-shadow: none !important;
+    border: 0 !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  [data-recruiter-section],
+  [data-recruiter-card] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
+    color: #333;
+  }
+  a[href^="/"]::after,
+  a[href^="#"]::after,
+  a[href^="mailto:"]::after {
+    content: "";
+  }
+}
